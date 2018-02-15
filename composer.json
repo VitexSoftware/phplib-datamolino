@@ -1,0 +1,35 @@
+{
+    "name": "vitexsoftware/datamolino",
+    "description": "Client Library",
+    "type": "library",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Cybervitexus",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "vitexsoftware/ease-framework": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Datamolino\\": "src/Datamolino/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\Ease\\": "vendor/vitexsoftware/ease-framework/tests/src/Ease",
+            "Test\\Datamolino\\": "tests/src/Datamolino/",
+            "Test\\": "testing/"
+        }
+    },
+    "require-dev": {
+        "phpunit/php-token-stream": "~1.2",
+        "phpunit/phpunit": "5.3.*",
+        "phpunit/phpunit-skeleton-generator": "*",
+        "jakub-onderka/php-parallel-lint": "^0.9.2",
+        "jakub-onderka/php-console-highlighter": "^0.3.2"
+    }
+}

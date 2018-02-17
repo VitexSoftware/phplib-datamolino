@@ -20,7 +20,7 @@ class ApiClient extends \Ease\Brick
      *
      * @var string
      */
-    public static $libVersion = '0.1';
+    public static $libVersion = '0.1.1';
 
     /**
      * Communication protocol version used.

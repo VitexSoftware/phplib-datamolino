@@ -6,6 +6,14 @@ namespace Test\Datamolino;
  */
 
 define('EASE_LOGGER', 'syslog');
-require_once '../vendor/autoload.php';
-require_once '../Examples/config.php';
+
+$autoloadScript = 'vendor/autoload.php';
+$configuration  = 'Examples/config.php';
+
+if(!file_exists($autoloadScript)){
+    $autoloadScript = '../'.$autoloadScript;
+    $configuration = '../'.$configuration;
+}
+include_once $autoloadScript;
+include_once $configuration;
 

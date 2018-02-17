@@ -1,3 +1,7 @@
 /DataMolino-soapui-project.xml
 /composer.lock
 /vendor/
+/debian/vendor/
+/debian/php-datamolino.substvars
+/debian/debhelper-build-stamp
+/clover.log

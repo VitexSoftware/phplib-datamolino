@@ -40,5 +40,4 @@ class User extends ApiClient
     {
         parent::__construct($init, $options);
     }
-
 }

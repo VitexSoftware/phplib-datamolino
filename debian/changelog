@@ -1,0 +1,10 @@
+php-datamolino (0.1-1) UNRELEASED; urgency=low
+
+  [ Vítězslav Vitex Dvořák ]
+
+    Initial release
+
+  [ root ]
+  *     License Fixed
+
+ -- root <info@vitexsoftware.cz>  Sat, 17 Feb 2018 11:56:15 +0100

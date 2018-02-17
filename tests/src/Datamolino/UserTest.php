@@ -18,7 +18,7 @@ class UserTest extends ApiClientTest
      */
     protected function setUp()
     {
-        $this->object = new User;
+        $this->object = new User();
     }
 
     /**

@@ -26,13 +26,14 @@ For Debian, Ubuntu & friends please use repo:
 
     wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
     echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/ease.list
-    aptitude update
-    aptitude install php-datamolino
+    apt update
+    apt install php-datamolino
 
 In this case please add this to your app composer.json:
 
     "require": {
-        "ease-framework": "*"
+        "ease-framework": "*",
+        "datamolino": "*"
     },
     "repositories": [
         {
@@ -65,7 +66,7 @@ Configuration Constants
 -----------------------
 
   * DATAMOLINO_URL        - could be https://beta.datamolino.com/ for testing or https://app.datamolino.com/ for production usage
-  * DATAMOLINO_ID         - API ID  - request access keys by sending an email to [info@datamolino.com](mailto:info@datamolino.com?subject=Datamolino API: Request for application registration&body=Company name: ,Project name: )
+  * DATAMOLINO_ID         - API ID  - request access keys by sending an email to [info@datamolino.com]
   * DATAMOLINO_SECRET     - API Secret - this code you obtain with API ID
   * DATAMOLINO_USERNAME   - email address used to sign in to datamolino web interface
   * DATAMOLINO_PASSWORD   - password for datamolino web interface

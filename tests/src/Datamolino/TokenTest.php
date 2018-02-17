@@ -31,6 +31,32 @@ class TokenTest extends ApiClientTest
     {
         
     }
+    /**
+     * Test Constructor
+     *
+     * @covers Datamolino\Token::__construct
+     */
+    public function testConstructor()
+    {
+        $classname = get_class($this->object);
+
+        // Get mock, without the constructor being called
+        $mock = $this->getMockBuilder($classname)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $mock->__construct(1, ['debug' => false]);
+
+               
+        $mock->__construct('',
+            [
+                'client_id' => constant('DATAMOLINO_ID'),
+                'client_secret' => constant('DATAMOLINO_SECRET'),
+                'url' => constant('DATAMOLINO_URL'),
+                'username' => constant('DATAMOLINO_USERNAME'),
+                'password' => constant('DATAMOLINO_PASSWORD'),
+                'debug' => true]);
+    }
+    
 
     /**
      * @covers Datamolino\Token::setUp

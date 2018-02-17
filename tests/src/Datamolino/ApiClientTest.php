@@ -41,6 +41,30 @@ class ApiClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Constructor
+     *
+     * @covers Datamolino\ApiClient::__construct
+     */
+    public function testConstructor()
+    {
+        $classname = get_class($this->object);
+        $section  = $this->object->getSection();
+
+        // Get mock, without the constructor being called
+        $mock = $this->getMockBuilder($classname)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $mock->__construct(1, ['debug' => false]);
+
+        $mock->__construct('',
+            [
+                'url' => constant('DATAMOLINO_URL'),
+                'debug' => true,
+                'section' => $section]);
+    }
+    
+    
+    /**
      * @covers Datamolino\ApiClient::curlInit
      */
     public function testCurlInit()

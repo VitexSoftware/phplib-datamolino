@@ -1,0 +1,3 @@
+src/Datamolino/*.php        /usr/share/php/Datamolino
+debian/composer.json        /usr/share/php/Datamolino
+

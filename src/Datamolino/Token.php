@@ -88,10 +88,21 @@ class Token extends ApiClient
         return $this->getDataValue('access_token');
     }
 
+    /**
+     * Take Token data
+     * 
+     * @param array $data
+     * 
+     * @return int items taken count
+     */
     public function takeData($data)
     {
-        $this->expire = time() + $data['expires_in'];
-        return parent::takeData($data);
+        $result = null;
+        if (is_array($data) && array_key_exists('expires_in', $data)) {
+            $this->expire = time() + $data['expires_in'];
+            $result       = parent::takeData($data);
+        }
+        return $result;
     }
 
     /**

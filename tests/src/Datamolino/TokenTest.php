@@ -47,7 +47,7 @@ class TokenTest extends ApiClientTest
         $mock->__construct(1, ['debug' => false]);
 
                
-        $mock->__construct('',
+        $mock->__construct(null,
             [
                 'client_id' => constant('DATAMOLINO_ID'),
                 'client_secret' => constant('DATAMOLINO_SECRET'),

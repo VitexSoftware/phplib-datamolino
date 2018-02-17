@@ -10,6 +10,7 @@ install: build
 	echo install
 	
 build: doc
+	docker build -t php-datamolino .
 	echo build
 
 clean:
@@ -24,6 +25,10 @@ doc:
 
 test:
 	phpunit tests/ --configuration phpunit.xml
+
+docker:
+	docker build . -t phplib-datamolino
+	docker push vitexus/phplib-datamolino:latest
 
 deb:
 	debuild -i -us -uc -b

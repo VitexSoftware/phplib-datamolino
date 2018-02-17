@@ -28,6 +28,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "6.0.x-dev",
+        "phpunit/php-code-coverage": "^5.0"
     }
 }

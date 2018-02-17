@@ -11,7 +11,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "vitexsoftware/ease-framework": "dev-master"
+        "vitexsoftware/ease-framework": "dev-master",
+        "jakub-onderka/php-parallel-lint": "dev-master",
+        "jakub-onderka/php-console-highlighter": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -26,9 +28,6 @@
         }
     },
     "require-dev": {
-        "phpunit/php-token-stream": "~1.2",
-        "phpunit/phpunit": "5.3.*",
-        "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "jakub-onderka/php-console-highlighter": "^0.3.2"
+        "phpunit/phpunit": "^7.0"
     }
 }

@@ -13,7 +13,7 @@ and gives you OCRed result data in web interface or via API https://datamolino.d
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat-square)](https://github.com/VitexSoftware/phplib-datamolino/blob/master/LICENSE)
 [![Build Status](https://img.shields.io/travis/VitexSoftware/phplib-datamolino/master.svg?style=flat-square)](https://travis-ci.org/VitexSoftware/phplib-datamolino)
 [![Total Downloads](https://img.shields.io/packagist/dt/vitexsoftware/datamolino.svg?style=flat-square)](https://packagist.org/packages/vitexsoftware/datamolino)
-[![Docker pulls](https://img.shields.io/docker/pulls/vitexsoftware/phplib-datamolino.svg)](https://hub.docker.com/r/vitexsoftware/phplib-datamolino/)
+[![Docker pulls](https://img.shields.io/docker/pulls/vitexus/phplib-datamolino.svg)](https://hub.docker.com/r/vitexus/phplib-datamolino/)
 [![Latest stable](https://img.shields.io/packagist/v/vitexsoftware/phplib-datamolino.svg?style=flat-square)](https://packagist.org/packages/vitexsoftware/phplib-datamolino)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/246e6c0a-a6e5-41ad-9fe0-0b9d95703056/big.png)](https://insight.sensiolabs.com/projects/4900ce8c-8619-4007-b2d6-0ac830064963)

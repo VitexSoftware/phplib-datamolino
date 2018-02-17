@@ -8,6 +8,15 @@ Datamolino motto: Let humans focus on creating value, leave robotic work to robo
 [Datamolino](https://www.datamolino.com/) service process invoice bitmap image 
 and gives you OCRed result data in web interface or via API https://datamolino.docs.apiary.io/
 
+[![Source Code](http://img.shields.io/badge/source-VitexSoftware/phplib-datamolino-blue.svg?style=flat-square)](https://github.com/VitexSoftware/phplib-datamolino)
+[![Latest Version](https://img.shields.io/github/release/VitexSoftware/phplib-datamolino.svg?style=flat-square)](https://github.com/VitexSoftware/phplib-datamolino/releases)
+[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat-square)](https://github.com/VitexSoftware/phplib-datamolino/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/VitexSoftware/phplib-datamolino/master.svg?style=flat-square)](https://travis-ci.org/VitexSoftware/phplib-datamolino)
+[![Total Downloads](https://img.shields.io/packagist/dt/vitexsoftware/phplib-datamolino.svg?style=flat-square)](https://packagist.org/packages/vitexsoftware/phplib-datamolino)
+[![Docker pulls](https://img.shields.io/docker/pulls/vitexsoftware/phplib-datamolino.svg)](https://hub.docker.com/r/vitexsoftware/phplib-datamolino/)
+[![Latest stable](https://img.shields.io/packagist/v/vitexsoftware/phplib-datamolino.svg?style=flat-square)](https://packagist.org/packages/vitexsoftware/phplib-datamolino)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/246e6c0a-a6e5-41ad-9fe0-0b9d95703056/big.png)](https://insight.sensiolabs.com/projects/4900ce8c-8619-4007-b2d6-0ac830064963)
 
 
 Installation
@@ -32,7 +41,7 @@ For Debian, Ubuntu & friends please use repo:
 In this case please add this to your app composer.json:
 
     "require": {
-        "ease-framework": "*",
+        "phplib-datamolino": "*",
         "datamolino": "*"
     },
     "repositories": [

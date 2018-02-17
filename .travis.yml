@@ -16,8 +16,8 @@ before_script:
   - travis_retry echo 'memory_limit = "2048M"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   
 script:
-  - ./vendor/bin/parallel-lint src testing
-  - ./vendor/bin/phpunit --coverage-text --coverage-clover clover --bootstrap testing/bootstrap.php
+  - ./vendor/bin/parallel-lint src tests
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover clover --bootstrap tests/bootstrap.php
   - php -i | grep memory_limit
   - "! (composer outdated --direct | grep ^)"
  

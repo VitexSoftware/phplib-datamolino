@@ -28,7 +28,7 @@ class Document extends ApiClient
      *
      * @var string
      */
-    public $section = 'document';
+    public $section = 'documents';
 
     /**
      * Document
@@ -43,4 +43,8 @@ class Document extends ApiClient
         parent::__construct($init, $options);
     }
 
+    public function getDocuments($agendaId)
+    {
+        return $this->requestData('?agenda_id='.$agendaId);
+    }
 }

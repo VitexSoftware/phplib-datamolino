@@ -241,6 +241,7 @@ class ApiClientTest extends \PHPUnit\Framework\TestCase
     public function testIgnore404()
     {
         $this->object->ignore404(true);
+        $this->assertTrue($this->object->ignore404());
     }
 
     /**

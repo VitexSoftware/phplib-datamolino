@@ -207,9 +207,7 @@ class ApiClient extends \Ease\Brick
     public function setUp($options = [])
     {
         $this->setupProperty($options, 'url', 'DATAMOLINO_URL');
-        if (isset($options['section'])) {
-            $this->setSection($options['section']);
-        }
+        $this->setSection( isset($options['section']) ? $options['section'] : $this->section );
         $this->setupProperty($options, 'defaultUrlParams');
         $this->setupProperty($options, 'debug');
         $this->updateApiURL();
@@ -429,7 +427,8 @@ class ApiClient extends \Ease\Brick
                     $this->lastInsertedID = null;
                 }
             case 200: //Success Read
-                $response         = $this->lastResult = $responseDecoded;
+                $this->lastResult = $responseDecoded;
+                $response         = array_key_exists($this->getSection(), $responseDecoded) ? $responseDecoded[$this->getSection()] : $responseDecoded;
                 break;
 
             case 500: // Internal Server Error
@@ -438,6 +437,7 @@ class ApiClient extends \Ease\Brick
                     break;
                 }
             case 400: //Bad Request parameters
+            case 422:    
             default: //Something goes wrong
 
                 $this->addStatusMessage((isset($responseDecoded['message']) ? $responseDecoded['message'].': '
@@ -461,7 +461,14 @@ class ApiClient extends \Ease\Brick
      */
     public function parseError(array $responseDecoded)
     {
-        $this->errors = $responseDecoded;
+        
+        if(array_key_exists('errors', $responseDecoded)){
+            $this->errors = $responseDecoded['errors'];
+            foreach ($responseDecoded['errors'] as $errorInfo){
+                $this->addStatusMessage(json_encode($errorInfo) , 'error');
+            }
+        }
+        
         return count($this->errors);
     }
 
@@ -623,7 +630,7 @@ class ApiClient extends \Ease\Brick
         if (empty($data)) {
             $data = $this->getData();
         }
-        $this->setPostFields(json_encode([[$this->section => [$data]]],
+        $this->setPostFields(json_encode([$this->section => [$data]],
                 JSON_PRETTY_PRINT));
         return $this->requestData(null, 'POST');
     }

@@ -281,7 +281,7 @@ class ApiClient extends \Ease\Brick
         $sectionUrl = $this->url.'/api/'.$this->protoVersion.'/';
         $section    = $this->getSection();
         if (!empty($section)) {
-            $sectionUrl .= $section.'/';
+            $sectionUrl .= $section;
         }
         return $sectionUrl;
     }
@@ -297,6 +297,10 @@ class ApiClient extends \Ease\Brick
     {
         $sectionUrl = $this->getSectionURL();
         if (!empty($urlSuffix)) {
+            if (($urlSuffix[0] != '/') && ($urlSuffix[0] != ';') && ($urlSuffix[0]
+                != '?')) {
+                $sectionUrl .= '/';
+            }
             $sectionUrl .= $urlSuffix;
         }
         return $sectionUrl;
@@ -429,6 +433,7 @@ class ApiClient extends \Ease\Brick
             case 200: //Success Read
                 $this->lastResult = $responseDecoded;
                 $response         = array_key_exists($this->getSection(), $responseDecoded) ? $responseDecoded[$this->getSection()] : $responseDecoded;
+            case 204: //Success delete
                 break;
 
             case 500: // Internal Server Error

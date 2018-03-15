@@ -13,7 +13,8 @@
     "require": {
         "vitexsoftware/ease-framework": "*",
         "jakub-onderka/php-parallel-lint": "*",
-        "jakub-onderka/php-console-highlighter": "*"
+        "jakub-onderka/php-console-highlighter": "*",
+        "yowcow/mime-base64-urlsafe": "dev-master"
     },
     "autoload": {
         "psr-4": {

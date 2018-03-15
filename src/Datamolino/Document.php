@@ -46,25 +46,59 @@ class Document extends ApiClient
     /**
      * Obtain Documents listing for given folder
      * 
-     * @param int $agendaId FolderID
+     * @param int   $agendaId FolderID
+     * @param array $states   States Requested
+     * @param int   $page     Which Page with up to 50 records request ?
      * 
      * @return array
      */
-    public function getDocuments($agendaId)
+    public function getPageOfDocuments($agendaId, $states = ['ready'], $page = 1)
     {
-        return $this->requestData('?agenda_id='.$agendaId);
+        $urlparams = '?agenda_id='.$agendaId.'&page='.$page;
+
+        if (!empty($states)) {
+            foreach ($states as $state) {
+                $statesRaw[] = 'states[]='.$state;
+            }
+            $urlparams .= '&states='.urlencode('['.implode('&', $statesRaw).']');
+        }
+        return $this->requestData($urlparams);
     }
 
     /**
+     * Get All Documents
      * 
-     * @return type
+     * @param int   $agendaId FolderID
+     * @param array $states   States Requested
+     * 
+     * @return array All results
+     */
+    public function getAllDocuments($agendaId, $states = ['ready'])
+    {
+        $page     = 1;
+        $allPages = [];
+        do {
+            $pageData = $this->getPageOfDocuments($agendaId, $states, $page++);
+            if (!empty($pageData)) {
+                $allPages = array_merge($allPages, \Ease\Sand::reindexArrayBy($pageData,'id'));
+            }
+        } while (count($pageData) == 50);
+        return $allPages;
+    }
+
+    /**
+     * Obtain Original File Data 
+     * 
+     * @return array
      */
     public function getOriginalFileData($documentId = null)
     {
         if (is_null($documentId)) {
             $documentId = $this->getMyKey();
         }
-        return current($this->requestData($documentId.'/original_file'));
+        $fileInfo                       = $this->requestData($documentId.'/original_file')[0];
+        $fileInfo['original_file_body'] = \MIME\Base64URLSafe::urlsafe_b64decode($fileInfo['original_file_base64']);
+        return $fileInfo;
     }
 
     /**
@@ -80,6 +114,6 @@ class Document extends ApiClient
         $originalFileData = $this->getOriginalFileData($documentId);
         return file_put_contents(is_dir($destination) ? $destination.'/'.$originalFileData['user_file_name']
                 : $originalFileData['user_file_name'],
-            base64_decode($originalFileData['original_file_base64']));
+            $originalFileData['original_file_body']);
     }
 }

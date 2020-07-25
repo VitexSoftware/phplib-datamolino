@@ -4,10 +4,15 @@
  * Datamolino - Document handling Class.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  (C) 2018 Vitex Software
+ * @copyright  (C) 2018-2020 Vitex Software
  */
 
 namespace Datamolino;
+
+use Datamolino\ApiClient;
+use Ease\Sand;
+use Ease\Shared;
+use MIME\Base64URLSafe;
 
 /**
  * Document 
@@ -78,7 +83,7 @@ class Document extends ApiClient {
         do {
             $pageData = $this->getPageOfDocuments($agendaId, $states, $page++);
             if (!empty($pageData)) {
-                $allPages = array_merge($allPages, \Ease\Sand::reindexArrayBy($pageData, 'id'));
+                $allPages = array_merge($allPages, Sand::reindexArrayBy($pageData, 'id'));
             }
         } while (count($pageData) == 50);
         return $allPages;
@@ -94,7 +99,7 @@ class Document extends ApiClient {
             $documentId = $this->getMyKey();
         }
         $fileInfo = $this->requestData($documentId . '/original_file')[0];
-        $fileInfo['original_file_body'] = \MIME\Base64URLSafe::urlsafe_b64decode($fileInfo['original_file_base64']);
+        $fileInfo['original_file_body'] = Base64URLSafe::urlsafe_b64decode($fileInfo['original_file_base64']);
         return $fileInfo;
     }
 

@@ -1,4 +1,4 @@
-Source: php-datamolino
+Source: php-vitexsoftware-datamolino
 Build-Depends: debhelper (>= 7.0.50~),php-apigen
 Standards-Version: 3.8.4
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
@@ -6,8 +6,8 @@ Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
 Homepage: https://github.com/VitexSoftware/phplib-datamolino
 
-Package: php-datamolino
-Depends: ${misc:Depends},php5-curl | php7.0-curl,ease-framework
+Package: php-vitexsoftware-datamolino
+Depends: ${misc:Depends},php-curl,ease-core
 Suggests: composer,php-datamolino-doc
 Architecture: all
 Section: web

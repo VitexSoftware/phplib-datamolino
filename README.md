@@ -16,8 +16,7 @@ and gives you OCRed result data in web interface or via API https://datamolino.d
 [![Docker pulls](https://img.shields.io/docker/pulls/vitexus/phplib-datamolino.svg)](https://hub.docker.com/r/vitexus/phplib-datamolino/)
 [![Latest stable](https://img.shields.io/packagist/v/vitexsoftware/datamolino.svg?style=flat-square)](https://packagist.org/packages/vitexsoftware/datamolino)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/246e6c0a-a6e5-41ad-9fe0-0b9d95703056/big.png)](https://insight.sensiolabs.com/projects/4900ce8c-8619-4007-b2d6-0ac830064963)
-
+![PHP Composer](https://github.com/VitexSoftware/phplib-datamolino/workflows/PHP%20Composer/badge.svg)
 
 Installation
 ============
@@ -33,21 +32,23 @@ Linux
 
 For Debian, Ubuntu & friends please use repo:
 
-    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-    echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/ease.list
-    apt update
-    apt install php-datamolino
+```shell
+sudo apt install lsb-release wget
+echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
+sudo apt update
+sudo apt install php-datamolino
+```
 
 In this case please add this to your app composer.json:
 
     "require": {
-        "phplib-datamolino": "*",
-        "datamolino": "*"
+        "deb/datamolino": "*",
     },
     "repositories": [
         {
             "type": "path",
-            "url": "/usr/share/php/Ease",
+            "url": "/usr/share/php/EaseCore",
             "options": {
                 "symlink": true
             }

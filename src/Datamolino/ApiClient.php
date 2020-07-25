@@ -9,19 +9,22 @@
 
 namespace Datamolino;
 
+use Ease\Brick;
+use Ease\Functions;
+
 /**
  * Basic class
  *
  * @url https://datamolino.docs.apiary.io
  */
-class ApiClient extends \Ease\Brick {
+class ApiClient extends Brick {
 
     /**
      * Version of phplib-datamolino library
      *
      * @var string
      */
-    public static $libVersion = '0.1.1';
+    public static $libVersion = '1.37';
 
     /**
      * Communication protocol version used.
@@ -185,7 +188,6 @@ class ApiClient extends \Ease\Brick {
     public function __construct($init = null, $options = []) {
         $this->init = $init;
 
-        parent::__construct();
         $this->setUp($options);
         $this->curlInit();
 
@@ -317,7 +319,7 @@ class ApiClient extends \Ease\Brick {
 
         if (preg_match('/^http/', $urlSuffix)) {
             $url = $urlSuffix;
-        } elseif ($urlSuffix[0] == '/') {
+        } elseif (is_string($urlSuffix) && $urlSuffix[0] == '/') {
             $url = $this->url . $urlSuffix;
         } else {
             $url = $this->sectionUrlWithSuffix($urlSuffix);
@@ -340,34 +342,6 @@ class ApiClient extends \Ease\Brick {
     }
 
     /**
-     * Add params to url
-     *
-     * @param string  $url      originall url
-     * @param array   $params   value to add
-     * @param boolean $override replace already existing values ?
-     *
-     * @return string url with parameters added
-     */
-    public function addUrlParams($url, $params, $override = false) {
-        $urlParts = parse_url($url);
-        $urlFinal = $urlParts['scheme'] . '://' . $urlParts['host'];
-        if (array_key_exists('path', $urlParts)) {
-            $urlFinal .= $urlParts['path'];
-        }
-        if (array_key_exists('query', $urlParts)) {
-            parse_str($urlParts['query'], $queryUrlParams);
-            $urlParams = $override ? array_merge($params, $queryUrlParams) : array_merge($queryUrlParams,
-                            $params);
-        } else {
-            $urlParams = $params;
-        }
-        if (count($urlParams)) {
-            $urlFinal .= '?' . http_build_query($urlParams);
-        }
-        return $urlFinal;
-    }
-
-    /**
      * Add Default Url params to given url if not overrided
      *
      * @param string $urlRaw
@@ -375,7 +349,7 @@ class ApiClient extends \Ease\Brick {
      * @return string url with default params added
      */
     public function addDefaultUrlParams($urlRaw) {
-        return $this->addUrlParams($urlRaw, $this->defaultUrlParams, false);
+        return Functions::addUrlParams($urlRaw, $this->defaultUrlParams, false);
     }
 
     /**
@@ -546,10 +520,10 @@ class ApiClient extends \Ease\Brick {
             $resultData = $this->lastResult;
         }
         if (isset($url)) {
-            $this->logger->addStatusMessage(urldecode($url));
+            $this->logger->addToLog($this, urldecode($url), 'debug');
         }
         if (!empty($resultData) && array_key_exists('message', $resultData)) {
-            $this->logger->addStatusMessage($resultData['message'], 'warning');
+            $this->logger->addToLog($this, $resultData['message'], 'warning');
         }
 
         return $logResult;

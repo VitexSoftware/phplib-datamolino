@@ -1,4 +1,9 @@
-all: fresh build install
+package=$(head -n1 debian/changelog | awk '{print $1}')
+repoversion=$(shell LANG=C aptitude show php-flexibee | grep Version: | awk '{print $$2}')
+nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
+
+
+all:
 
 fresh:
 	git pull
@@ -6,24 +11,14 @@ fresh:
 	composer update
 	cd ..
 
-install: build
-	echo install
-	
-build: doc
-	docker build -t php-datamolino .
-	echo build
-
 clean:
-	rm -rf debian/php-datamolino
-	rm -rf debian/php-datamolino-doc
+	rm -rf debian/php-vitexsoftware-datamolino
+	rm -rf debian/php-vitexsoftware-datamolino-doc
 	rm -rf debian/*.log
 	rm -rf docs/*
 	rm -rf vendor/* debian/vendor
 
-doc:
-	debian/apigendoc.sh
-
-test:
+phpunit:
 	phpunit tests/ --configuration phpunit.xml
 
 docker:
@@ -32,6 +27,15 @@ docker:
 
 deb:
 	debuild -i -us -uc -b
+
+release:
+	echo Release v$(nextversion)
+	dch -v $(nextversion) `git log -1 --pretty=%B | head -n 1`
+	debuild -i -us -uc -b
+	git commit -a -m "Release v$(nextversion)"
+	git tag -a $(nextversion) -m "version $(nextversion)"
+
+
 
 .PHONY : install
 	

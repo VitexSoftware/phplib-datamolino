@@ -1,13 +1,16 @@
 <?php
 
 /**
- * primaERP - Token handling Class.
+ * Datamolino - User Class.
  *
  * @author     Vítězslav Dvořák <vitex@arachne.cz>
- * @copyright  (C) 2017 Vitex Software
+ * @copyright  (C) 2017-2020 Vitex Software
  */
 
 namespace Datamolino;
+
+use Datamolino\ApiClient;
+use Ease\Shared;
 
 /**
  * Token handling Class.

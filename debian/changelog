@@ -1,4 +1,4 @@
-php-datamolino (0.1-1) UNRELEASED; urgency=low
+php-vitexsoftware-datamolino (1.37) UNRELEASED; urgency=low
 
   [ Vítězslav Vitex Dvořák ]
 
@@ -6,5 +6,10 @@ php-datamolino (0.1-1) UNRELEASED; urgency=low
 
   [ root ]
   *     License Fixed
+  *     Create php.yml
+  *     Create php.yml
 
- -- root <info@vitexsoftware.cz>  Sat, 17 Feb 2018 11:56:15 +0100
+  [ CyberVitexus ]
+  * Create php.yml
+
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 25 Jul 2020 11:38:12 +0200

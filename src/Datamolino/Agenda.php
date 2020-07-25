@@ -9,6 +9,9 @@
 
 namespace Datamolino;
 
+use Datamolino\ApiClient;
+use Ease\Shared;
+
 /**
  * Agenda handling Class.
  *
@@ -39,7 +42,7 @@ class Agenda extends ApiClient {
      * @param array $options
      */
     public function __construct($init = null, $options = []) {
-//        parent::__construct($init, $options);
+        parent::__construct($init, $options);
     }
 
     /**

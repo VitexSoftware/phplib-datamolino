@@ -22,7 +22,7 @@ $result = $agendor->createNew([
     "home_currency" => "EUR",
     "email_alias" => "datamolino123",
     "email_whitelist" => "test@yahoo.com, invoices@gmail.com"
-    ]
+        ]
 );
 
 print_r($result);

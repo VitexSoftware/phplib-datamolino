@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "vitexsoftware/ease-framework": "*",
+        "vitexsoftware/ease-core": "*",
         "jakub-onderka/php-parallel-lint": "*",
         "jakub-onderka/php-console-highlighter": "*",
         "yowcow/mime-base64-urlsafe": "dev-master"
@@ -29,6 +29,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^8.0"
     }
 }

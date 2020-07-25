@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Datamolino - Agenda handling Class.
  *
@@ -13,8 +14,8 @@ namespace Datamolino;
  *
  * @url https://datamolino.docs.apiary.io/#reference/agenda/
  */
-class Agenda extends ApiClient
-{
+class Agenda extends ApiClient {
+
     /**
      * Saves obejct instace (singleton...).
      *
@@ -37,9 +38,8 @@ class Agenda extends ApiClient
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = [])
-    {
-        parent::__construct($init, $options);
+    public function __construct($init = null, $options = []) {
+//        parent::__construct($init, $options);
     }
 
     /**
@@ -47,8 +47,7 @@ class Agenda extends ApiClient
      * 
      * @return array
      */
-    public function getListing()
-    {
+    public function getListing() {
         return $this->requestData();
     }
 
@@ -59,8 +58,8 @@ class Agenda extends ApiClient
      * 
      * @return array
      */
-    public function createNew($data)
-    {
+    public function createNew($data) {
         return $this->postData($data);
     }
+
 }

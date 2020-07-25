@@ -5,3 +5,4 @@
 /debian/php-datamolino.substvars
 /debian/debhelper-build-stamp
 /clover.log
+/nbproject/private/

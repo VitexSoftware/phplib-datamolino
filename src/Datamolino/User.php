@@ -1,4 +1,5 @@
 <?php
+
 /**
  * primaERP - Token handling Class.
  *
@@ -13,8 +14,8 @@ namespace Datamolino;
  *
  * @url http://devdoc.primaerp.com/rest/authentication.html
  */
-class User extends ApiClient
-{
+class User extends ApiClient {
+
     /**
      * Saves obejct instace (singleton...).
      *
@@ -36,8 +37,8 @@ class User extends ApiClient
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = array())
-    {
+    public function __construct($init = null, $options = array()) {
         parent::__construct($init, $options);
     }
+
 }

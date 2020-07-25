@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Datamolina - Token handling Class.
  *
@@ -13,8 +14,8 @@ namespace Datamolino;
  *
  * @url https://datamolino.docs.apiary.io/#reference/authorization/obtain-access-token
  */
-class Token extends ApiClient
-{
+class Token extends ApiClient {
+
     /**
      * Saves obejct instace (singleton...).
      *
@@ -46,8 +47,7 @@ class Token extends ApiClient
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = array())
-    {
+    public function __construct($init = null, $options = array()) {
         parent::__construct($init, $options);
         $this->refreshToken();
     }
@@ -59,8 +59,7 @@ class Token extends ApiClient
      *                                       client_id,client_secret,username,password
      *                                       defaultUrlParams,debug)
      */
-    public function setUp($options = [])
-    {
+    public function setUp($options = []) {
         parent::setUp($options);
         $this->setupProperty($options, 'client_id', 'DATAMOLINO_ID');
         $this->setupProperty($options, 'client_secret', 'DATAMOLINO_SECRET');
@@ -68,8 +67,7 @@ class Token extends ApiClient
         $this->setupProperty($options, 'password', 'DATAMOLINO_PASSWORD');
     }
 
-    public function authentication()
-    {
+    public function authentication() {
         if (!empty($this->apikey)) {
             $this->defaultUrlParams['apikey'] = $this->apikey;
         }
@@ -80,8 +78,7 @@ class Token extends ApiClient
      *
      * @return string
      */
-    public function getTokenString()
-    {
+    public function getTokenString() {
         if ($this->isTokenExpired()) {
             $this->refreshToken();
         }
@@ -95,12 +92,11 @@ class Token extends ApiClient
      * 
      * @return int items taken count
      */
-    public function takeData($data)
-    {
+    public function takeData($data) {
         $result = null;
         if (is_array($data) && array_key_exists('expires_in', $data)) {
             $this->expire = time() + $data['expires_in'];
-            $result       = parent::takeData($data);
+            $result = parent::takeData($data);
         }
         return $result;
     }
@@ -110,8 +106,7 @@ class Token extends ApiClient
      *
      * @return boolean
      */
-    public function isTokenExpired()
-    {
+    public function isTokenExpired() {
         $expireTime = $this->expire - time();
         return $expireTime < 5;
     }
@@ -121,17 +116,16 @@ class Token extends ApiClient
      * 
      * @return HTTP response code
      */
-    public function requestFreshToken()
-    {
+    public function requestFreshToken() {
         $this->defaultHttpHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
         $this->setPostFields(http_build_query(
-                [
-                    'client_id' => $this->client_id,
-                    'client_secret' => $this->client_secret,
-                    'username' => $this->username,
-                    'password' => $this->password,
-                    'grant_type' => 'password',
-                ]
+                        [
+                            'client_id' => $this->client_id,
+                            'client_secret' => $this->client_secret,
+                            'username' => $this->username,
+                            'password' => $this->password,
+                            'grant_type' => 'password',
+                        ]
         ));
         return $this->requestData('/oauth/token', 'POST');
     }
@@ -139,8 +133,7 @@ class Token extends ApiClient
     /**
      * Refresh token if obsoleted
      */
-    public function refreshToken()
-    {
+    public function refreshToken() {
         $this->takeData($this->requestFreshToken());
     }
 
@@ -154,10 +147,9 @@ class Token extends ApiClient
      *
      * @return Token
      */
-    public static function singleton($init = null, $options = [])
-    {
+    public static function singleton($init = null, $options = []) {
         if (!isset(self::$_instance)) {
-            $class           = __CLASS__;
+            $class = __CLASS__;
             self::$_instance = new $class($init, $options);
         }
 
@@ -169,10 +161,10 @@ class Token extends ApiClient
      *
      * @return Shared
      */
-    public static function &instanced($init = null, $options = [])
-    {
+    public static function &instanced($init = null, $options = []) {
         $tokener = self::singleton($init, $options);
 
         return $tokener;
     }
+
 }

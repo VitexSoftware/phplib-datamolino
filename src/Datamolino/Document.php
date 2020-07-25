@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Datamolino - Document handling Class.
  *
@@ -13,8 +14,8 @@ namespace Datamolino;
  * 
  * @link https://datamolino.docs.apiary.io/#reference/document Document 
  */
-class Document extends ApiClient
-{
+class Document extends ApiClient {
+
     /**
      * Saves obejct instace (singleton...).
      *
@@ -38,8 +39,7 @@ class Document extends ApiClient
      * @param mixed $init
      * @param array $options
      */
-    public function __construct($init = null, $options = array())
-    {
+    public function __construct($init = null, $options = array()) {
         parent::__construct($init, $options);
     }
 
@@ -52,15 +52,14 @@ class Document extends ApiClient
      * 
      * @return array
      */
-    public function getPageOfDocuments($agendaId, $states = ['ready'], $page = 1)
-    {
-        $urlparams = '?agenda_id='.$agendaId.'&page='.$page;
+    public function getPageOfDocuments($agendaId, $states = ['ready'], $page = 1) {
+        $urlparams = '?agenda_id=' . $agendaId . '&page=' . $page;
 
         if (!empty($states)) {
             foreach ($states as $state) {
-                $statesRaw[] = 'states[]='.$state;
+                $statesRaw[] = 'states[]=' . $state;
             }
-            $urlparams .= '&states='.urlencode('['.implode('&', $statesRaw).']');
+            $urlparams .= '&states=' . urlencode('[' . implode('&', $statesRaw) . ']');
         }
         return $this->requestData($urlparams);
     }
@@ -73,14 +72,13 @@ class Document extends ApiClient
      * 
      * @return array All results
      */
-    public function getAllDocuments($agendaId, $states = ['ready'])
-    {
-        $page     = 1;
+    public function getAllDocuments($agendaId, $states = ['ready']) {
+        $page = 1;
         $allPages = [];
         do {
             $pageData = $this->getPageOfDocuments($agendaId, $states, $page++);
             if (!empty($pageData)) {
-                $allPages = array_merge($allPages, \Ease\Sand::reindexArrayBy($pageData,'id'));
+                $allPages = array_merge($allPages, \Ease\Sand::reindexArrayBy($pageData, 'id'));
             }
         } while (count($pageData) == 50);
         return $allPages;
@@ -91,12 +89,11 @@ class Document extends ApiClient
      * 
      * @return array
      */
-    public function getOriginalFileData($documentId = null)
-    {
+    public function getOriginalFileData($documentId = null) {
         if (is_null($documentId)) {
             $documentId = $this->getMyKey();
         }
-        $fileInfo                       = $this->requestData($documentId.'/original_file')[0];
+        $fileInfo = $this->requestData($documentId . '/original_file')[0];
         $fileInfo['original_file_body'] = \MIME\Base64URLSafe::urlsafe_b64decode($fileInfo['original_file_base64']);
         return $fileInfo;
     }
@@ -109,11 +106,10 @@ class Document extends ApiClient
      * 
      * @return int saved data length
      */
-    public function saveOriginalFile($destination, $documentId = null)
-    {
+    public function saveOriginalFile($destination, $documentId = null) {
         $originalFileData = $this->getOriginalFileData($documentId);
-        return file_put_contents(is_dir($destination) ? $destination.'/'.$originalFileData['user_file_name']
-                : $originalFileData['user_file_name'],
-            $originalFileData['original_file_body']);
+        return file_put_contents(is_dir($destination) ? $destination . '/' . $originalFileData['user_file_name'] : $originalFileData['user_file_name'],
+                $originalFileData['original_file_body']);
     }
+
 }

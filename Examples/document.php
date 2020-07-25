@@ -11,7 +11,7 @@ $documentor = new Document();
 
 
 
-$result = $documentor->getDocuments($agendaId,$pageNo);
+$result = $documentor->getDocuments($agendaId, $pageNo);
 
 print_r($result);
 
